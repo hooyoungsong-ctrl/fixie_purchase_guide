@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>픽시 자전거 완전 조립 가이드 — 부품별 가격 & 구매 리스트</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface2: #1f1f1f;
+    --border: #2a2a2a;
+    --accent: #f5c400;
+    --accent2: #ff4b4b;
+    --text: #ebebeb;
+    --muted: #888;
+    --green: #4caf73;
+    --apex: #a78bfa;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--bg);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: 'FIXIE';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(120px, 30vw, 280px);
+    color: transparent;
+    -webkit-text-stroke: 1px #2a2a2a;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+  }
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: 1px solid var(--accent);
+    padding: 4px 12px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    line-height: 1.1;
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 32px;
+    position: relative;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-n {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+  }
+  .stat-l {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── NAV PILLS ── */
+  .nav-pills {
+    display: flex;
+    gap: 8px;
+    padding: 20px 24px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+  .nav-pills::-webkit-scrollbar { display: none; }
+  .pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    white-space: nowrap;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .pill:hover, .pill.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(245,196,0,0.08);
+  }
+
+  /* ── WRAPPER ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── SECTION ── */
+  section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 900;
+    margin-bottom: 32px;
+    line-height: 1.15;
+  }
+
+  /* ── BUDGET CARDS ── */
+  .budget-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 0;
+  }
+  .budget-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .budget-card:hover { border-color: var(--accent); }
+  .budget-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(245,196,0,0.06), var(--surface));
+  }
+  .budget-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .badge-green { background: rgba(76,175,115,0.15); color: var(--green); border: 1px solid rgba(76,175,115,0.3); }
+  .badge-yellow { background: rgba(245,196,0,0.15); color: var(--accent); border: 1px solid rgba(245,196,0,0.3); }
+  .badge-red { background: rgba(255,75,75,0.12); color: var(--accent2); border: 1px solid rgba(255,75,75,0.3); }
+  .badge-apex { background: rgba(167,139,250,0.12); color: var(--apex); border: 1px solid rgba(167,139,250,0.3); }
+  .budget-name {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+  .budget-range {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .budget-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── PARTS TABLE ── */
+  .parts-section { }
+  .part-group { margin-bottom: 48px; }
+  .part-group-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .part-group-title .icon { font-size: 18px; }
+
+  .part-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .part-card:hover { border-color: #444; }
+  .part-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    gap: 12px;
+  }
+  .part-name { font-weight: 700; font-size: 15px; }
+  .part-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .part-price-range {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .part-chevron {
+    color: var(--muted);
+    font-size: 12px;
+    transition: transform 0.3s;
+    margin-left: 8px;
+    display: inline-block;
+  }
+  .part-card.open .part-chevron { transform: rotate(180deg); }
+
+  .part-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .part-card.open .part-body { display: block; }
+
+  .tier-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .tier-row:last-child { border-bottom: none; }
+  .tier-label {
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .tier-entry { font-size: 13px; color: var(--text); }
+  .tier-brand { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .tier-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .buy-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid rgba(245,196,0,0.3);
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .buy-link:hover {
+    background: rgba(245,196,0,0.1);
+    border-color: var(--accent);
+  }
+
+  /* ── CALCULATOR ── */
+  #calculator { background: var(--surface); }
+  .calc-wrapper {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .calc-header {
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .calc-icon { font-size: 24px; }
+  .calc-title { font-size: 18px; font-weight: 700; }
+  .calc-subtitle { font-size: 12px; color: var(--muted); }
+
+  .calc-grid {
+    display: grid;
+    gap: 0;
+  }
+  .calc-row {
+    display: grid;
+    grid-template-columns: 1fr 140px 120px;
+    align-items: center;
+    padding: 14px 28px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .calc-row:last-child { border-bottom: none; }
+  .calc-part-name { font-size: 14px; font-weight: 500; }
+  .calc-part-note { font-size: 11px; color: var(--muted); }
+  .calc-select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    appearance: none;
+    width: 100%;
+  }
+  .calc-select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .calc-price-cell {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: right;
+    color: var(--accent);
+  }
+  .calc-price-cell.zero { color: var(--muted); }
+
+  .calc-total-row {
+    padding: 24px 28px;
+    background: var(--surface);
+    border-top: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .total-label { font-size: 14px; color: var(--muted); }
+  .total-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .total-context {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .total-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .total-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── TIPS ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .tip-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 20px;
+  }
+  .tip-icon { font-size: 24px; margin-bottom: 12px; }
+  .tip-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .tip-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .tip-highlight {
+    display: inline-block;
+    background: rgba(245,196,0,0.12);
+    color: var(--accent);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-weight: 700;
+  }
+
+  /* ── LEGAL WARNING ── */
+  .warning-box {
+    background: rgba(255,75,75,0.07);
+    border: 1px solid rgba(255,75,75,0.2);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-top: 32px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .warning-icon { font-size: 22px; flex-shrink: 0; }
+  .warning-text { font-size: 13px; color: #ff8888; line-height: 1.7; }
+  .warning-text strong { color: var(--accent2); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 24px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .calc-row { grid-template-columns: 1fr 110px 90px; padding: 12px 16px; }
+    .calc-total-row { padding: 20px 16px; }
+    .calc-header { padding: 18px 16px; }
+    .tier-row { grid-template-columns: 70px 1fr; }
+    .tier-price, .buy-link { grid-column: 2; }
+    .part-header { padding: 14px 16px; }
+    .part-body { padding: 0 16px 16px; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .budget-card { animation: fadeUp 0.5s ease both; }
+  .budget-card:nth-child(1) { animation-delay: 0.1s; }
+  .budget-card:nth-child(2) { animation-delay: 0.2s; }
+  .budget-card:nth-child(3) { animation-delay: 0.3s; }
+  .budget-card:nth-child(4) { animation-delay: 0.4s; }
+
+  /* ── DATE BAR ── */
+  .date-bar {
+    background: #111;
+    border-bottom: 1px solid var(--border);
+    padding: 9px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+  }
+  .date-bar:hover { background: #181818; }
+  .date-bar:hover .date-refresh-btn { opacity: 1; }
+  .date-bar-main {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .date-bar-main .dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .date-bar-note {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+  .date-bar-sep { color: #333; }
+  .date-refresh-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border: 1px solid rgba(245,196,0,0.35);
+    padding: 3px 10px;
+    border-radius: 100px;
+    opacity: 0.55;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  /* LOADING STATE */
+  .date-bar.loading { background: #161616; pointer-events: none; }
+  .date-bar.loading .dot { background: #fff; animation: spin-dot 0.7s linear infinite; }
+  @keyframes spin-dot {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.6); opacity: 0.4; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .date-bar.loading .date-refresh-btn { opacity: 0; }
+
+  /* UPDATED ROW FLASH */
+  .tier-price.updated {
+    animation: priceFlash 1.2s ease;
+  }
+  @keyframes priceFlash {
+    0% { color: var(--accent); }
+    30% { color: #fff; background: rgba(245,196,0,0.15); border-radius: 4px; }
+    100% { color: var(--accent); background: transparent; }
+  }
+
+  /* OVERLAY TOAST */
+  #updateToast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 22px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.3s;
+    opacity: 0;
+    white-space: nowrap;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  #updateToast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  #updateToast .toast-icon { font-size: 16px; }
+</style>
+</head>
+<body>
+
+<!-- DATE BAR -->
+<div class="date-bar" id="dateBar" onclick="refreshPrices()" title="클릭하여 가격 업데이트">
+  <div class="date-bar-main">
+    <span class="dot"></span>
+    가격 기준일: <span id="priceDate">2026년 5월 5일</span>
+  </div>
+  <span class="date-bar-sep">|</span>
+  <span class="date-bar-note" id="dateBarNote">시장가 기준 · 쇼핑몰별 실제 판매가 다를 수 있음 · 구매 전 링크 확인 권장</span>
+  <span class="date-refresh-btn">↻ 가격 업데이트</span>
+</div>
+
+<!-- TOAST -->
+<div id="updateToast"><span class="toast-icon"></span><span id="toastMsg"></span></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">2025 구매 가이드</div>
+  <h1>픽시 자전거<br><span>완전 조립 가격 가이드</span></h1>
+  <p class="hero-sub">부품 하나하나 직접 고르는 커스텀 픽시 빌드 — 브랜드별 가격 리스트와 인터랙티브 가격 계산기</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-n">13</span><span class="stat-l">핵심 부품</span></div>
+    <div class="stat"><span class="stat-n">4</span><span class="stat-l">예산 티어</span></div>
+    <div class="stat"><span class="stat-n">40만~</span><span class="stat-l">완차 시작가</span></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-pills">
+  <a class="pill active" href="#budget">예산 가이드</a>
+  <a class="pill" href="#parts">부품별 리스트</a>
+  <a class="pill" href="#calculator">가격 계산기</a>
+  <a class="pill" href="#tips">구매 팁</a>
+  <a class="pill" href="#shops">추천 쇼핑몰</a>
+</nav>
+
+<div class="container">
+
+  <!-- BUDGET SECTION -->
+  <section id="budget">
+    <div class="section-label">예산 가이드</div>
+    <h2 class="section-title">얼마면 될까?<br>네 가지 빌드 레벨</h2>
+    <div class="budget-grid">
+      <div class="budget-card">
+        <span class="budget-badge badge-green">ENTRY</span>
+        <div class="budget-name">입문 빌드</div>
+        <div class="budget-range">40–70만원</div>
+        <p class="budget-desc">쓰나미·블랙타이판 등 가성비 완성차, 또는 알루미늄 프레임 + 기본 부품 조합. 처음 픽시를 타보는 분에게 추천. 도심 출퇴근용으로 충분하다.</p>
+      </div>
+      <div class="budget-card featured">
+        <span class="budget-badge badge-yellow">MID ★ 추천</span>
+        <div class="budget-name">중급 빌드</div>
+        <div class="budget-range">80–150만원</div>
+        <p class="budget-desc">콘스탄틴·엔진11·언노운 프레임셋 + 브랜드 부품 조합. 디자인과 성능 모두 만족. 장기 라이딩과 커스텀을 즐기는 분께 최적.</p>
+      </div>
+      <div class="budget-card">
+        <span class="budget-badge badge-red">HIGH-END</span>
+        <div class="budget-name">하이엔드 빌드</div>
+        <div class="budget-range">200–500만원</div>
+        <p class="budget-desc">카본 프레임·카본 휠셋·NJS 컴포넌트 조합. 트랙 퍼포먼스와 최고급 소재. 엔진11 하이페리온 카본, 언노운 뉴 펄스 카본 등이 대표적.</p>
+      </div>
+      <div class="budget-card">
+        <span class="budget-badge badge-apex">APEX</span>
+        <div class="budget-name">에이펙스 빌드</div>
+        <div class="budget-range">500만원~</div>
+        <p class="budget-desc">NJS 공인 트랙 컴포넌트 풀 구성. 듀라에이스 7600 풀셋·스기노 75 크랭크·미케 허브·카본 딥림 휠셋. 레이싱 및 수집 목적의 극한 커스텀.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTS SECTION -->
+  <section id="parts">
+    <div class="section-label">부품별 리스트</div>
+    <h2 class="section-title">구성품 완전 분해<br>클릭해서 가격 확인</h2>
+
+    <!-- FRAME -->
+    <div class="part-group">
+      <div class="part-group-title"><span class="icon">🏗️</span> 프레임 & 포크</div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">프레임셋 (Frame + Fork)</div>
+            <div class="part-role">픽시의 핵심 뼈대. 소재는 알루미늄·크로몰리·카본 세 가지.</div>
+          </div>
+          <div>
+            <div class="part-price-range">15만 – 330만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">벡터 피스타 마크2 알루미늄 프레임셋<div class="tier-brand">Vector · 알루미늄 에어로</div></div>
+            <div class="tier-price">570,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">쓰나미 SNM100 프레임셋<div class="tier-brand">Tsunami · 알루미늄</div></div>
+            <div class="tier-price">~250,000원</div>
+            <a class="buy-link" href="https://m.naktas.co.kr/goods/goods_list.php?cateCd=005" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">엔진11 크릿디 트랙 프레임셋<div class="tier-brand">Engine11 · 알루미늄 에어로</div></div>
+            <div class="tier-price">940,000원</div>
+            <a class="buy-link" href="https://m.naktas.co.kr/goods/goods_list.php?cateCd=005" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">언노운 뉴 펄스 프레임셋<div class="tier-brand">Unknown · 알루미늄</div></div>
+            <div class="tier-price">1,530,000원</div>
+            <a class="buy-link" href="https://m.naktas.co.kr/goods/goods_list.php?cateCd=005" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row" data-key="engine11_hyperion">
+            <span class="tier-label badge-red">하이엔드</span>
+            <div class="tier-entry">엔진11 하이페리온 트랙 카본 프레임셋<div class="tier-brand">Engine11 · 풀 카본</div></div>
+            <div class="tier-price" id="price-engine11_hyperion">3,300,000원</div>
+            <a class="buy-link" id="link-engine11_hyperion" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row" data-key="look_564p">
+            <span class="tier-label badge-apex">에이펙스</span>
+            <div class="tier-entry">Look CR 564P 트랙 프레임셋<div class="tier-brand">LOOK · HM 풀 카본 · UCI 공인</div></div>
+            <div class="tier-price" id="price-look_564p">4,280,000원</div>
+            <a class="buy-link" id="link-look_564p" href="https://zinnbike.com/category/look/151/" target="_blank">↗ 진바이크</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-apex">에이펙스</span>
+            <div class="tier-entry">콜나고 픽스트 / 도스노벤타 NJS 크로몰리 프레임셋<div class="tier-brand">Colnago / Dos Noventa · NJS 공인 크로몰리</div></div>
+            <div class="tier-price">4,000,000원~</div>
+            <a class="buy-link" href="https://hellovelo.co.kr/category/%ED%94%BD%EC%8B%9C/26/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRIVETRAIN -->
+    <div class="part-group">
+      <div class="part-group-title"><span class="icon">⚙️</span> 드라이브트레인</div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">크랭크셋 (Crankset)</div>
+            <div class="part-role">체인링 + 크랭크암. 기어비 설정의 핵심. 44T~51T 일반적.</div>
+          </div>
+          <div>
+            <div class="part-price-range">5만 – 25만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">TA Specialties / 호환 알루미늄 크랭크셋<div class="tier-brand">알루미늄 · 46T 기준</div></div>
+            <div class="tier-price">50,000–80,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">벨로시닷 에어로코어 사각BB 크랭크셋<div class="tier-brand">Velocidad · 알루미늄 디스크</div></div>
+            <div class="tier-price">120,000–160,000원</div>
+            <a class="buy-link" href="https://veloshop.co.kr/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-red">하이엔드</span>
+            <div class="tier-entry">스기노 75 크랭크셋 (NJS)<div class="tier-brand">Sugino · 크로몰리 NJS 인증</div></div>
+            <div class="tier-price">200,000–350,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row" data-key="rotor_aldhu">
+            <span class="tier-label badge-apex">에이펙스</span>
+            <div class="tier-entry">Rotor ALDHU 카본 트랙 크랭크셋<div class="tier-brand">ROTOR · 카본 암 + noQ 트랙 체인링 포함</div></div>
+            <div class="tier-price" id="price-rotor_aldhu">841,000원</div>
+            <a class="buy-link" id="link-rotor_aldhu" href="https://zinnbike.com/product/rotor-aldhu-track-crank-set/6027/" target="_blank">↗ 진바이크</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-apex">에이펙스</span>
+            <div class="tier-entry">시마노 듀라에이스 7600 크랭크셋 (NJS)<div class="tier-brand">Shimano Dura-Ace · NJS 공인 트랙 전용</div></div>
+            <div class="tier-price">400,000–600,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">코그 + 락링 (Cog + Lockring)</div>
+            <div class="part-role">뒷바퀴 고정기어. 16T~18T 가장 흔함.</div>
+          </div>
+          <div>
+            <div class="part-price-range">1만 – 5만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">언노운 / 벡터 알루미늄 코그+락링 세트<div class="tier-brand">Unknown/Vector · 16T~18T</div></div>
+            <div class="tier-price">10,000–20,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">시마노 Dura-Ace 7600 코그<div class="tier-brand">Shimano · 스틸</div></div>
+            <div class="tier-price">25,000–45,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-apex">에이펙스</span>
+            <div class="tier-entry">미케 / 스기노 NJS 코그 + 락링 세트<div class="tier-brand">Miche / Sugino · NJS 공인 스틸</div></div>
+            <div class="tier-price">60,000–120,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">체인 (Chain)</div>
+            <div class="part-role">1/2" × 1/8" 싱글스피드 전용 체인 사용.</div>
+          </div>
+          <div>
+            <div class="part-price-range">1만 – 4만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">KMC Z1 / S1 싱글스피드 체인<div class="tier-brand">KMC · 1/2"×1/8"</div></div>
+            <div class="tier-price">12,000–18,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">시마노 CN-NX10 체인<div class="tier-brand">Shimano · 도금 처리</div></div>
+            <div class="tier-price">28,000–40,000원</div>
+            <a class="buy-link" href="https://www.vistabike.co.kr/goods/goods_list.php?cateCd=081" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">비비 (Bottom Bracket)</div>
+            <div class="part-role">크랭크와 프레임을 연결. 사각BB / 외장BB 방식.</div>
+          </div>
+          <div>
+            <div class="part-price-range">1만 – 6만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">시마노 BB-UN300 사각 BB<div class="tier-brand">Shimano · BSA 68/73mm</div></div>
+            <div class="tier-price">12,000–20,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">벨로시닷 VC-2 외장 BB<div class="tier-brand">Velocidad · 베어링 외장형</div></div>
+            <div class="tier-price">40,000–60,000원</div>
+            <a class="buy-link" href="https://veloshop.co.kr/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHEELS -->
+    <div class="part-group">
+      <div class="part-group-title"><span class="icon">🛞</span> 휠셋 & 타이어</div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">휠셋 (Wheelset)</div>
+            <div class="part-role">700C 알루미늄 딥림 또는 카본. 림 높이 30~88mm.</div>
+          </div>
+          <div>
+            <div class="part-price-range">8만 – 95만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">알루미늄 42mm 딥림 휠셋 (앞+뒤)<div class="tier-brand">언노운/벡터 호환 · 24홀</div></div>
+            <div class="tier-price">80,000–150,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">알루미늄 60mm 딥림 휠셋 (앞+뒤)<div class="tier-brand">벨로시닷·엔진11 · 20홀</div></div>
+            <div class="tier-price">250,000–500,000원</div>
+            <a class="buy-link" href="https://veloshop.co.kr/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-red">하이엔드</span>
+            <div class="tier-entry">벨로시닷 88mm 카본 휠셋 (앞+뒤)<div class="tier-brand">Velocidad · 풀 카본</div></div>
+            <div class="tier-price">950,000원</div>
+            <a class="buy-link" href="https://veloshop.co.kr/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row" data-key="unknown_sl60">
+            <span class="tier-label badge-red">하이엔드</span>
+            <div class="tier-entry">Unknown SL-60 카본 픽시 휠셋 (앞+뒤)<div class="tier-brand">Unknown · 60mm 카본림 · 경량 에어로</div></div>
+            <div class="tier-price" id="price-unknown_sl60">590,000원</div>
+            <a class="buy-link" id="link-unknown_sl60" href="https://m.gorgotago.com/shop/list.php?cate=0V0705" target="_blank">↗ 고르고타고</a>
+          </div>
+          <div class="tier-row" data-key="unknown_sl84">
+            <span class="tier-label badge-apex">에이펙스</span>
+            <div class="tier-entry">Unknown SL-84 트랙 픽시 카본 휠셋 (앞+뒤)<div class="tier-brand">Unknown · 84mm 하이림 · 풀 카본</div></div>
+            <div class="tier-price" id="price-unknown_sl84">690,000원</div>
+            <a class="buy-link" id="link-unknown_sl84" href="https://m.gorgotago.com/shop/list.php?cate=0V0705" target="_blank">↗ 고르고타고</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-apex">에이펙스</span>
+            <div class="tier-entry">미케 허브 + 수제 36홀 스포크 빌딩 트랙 휠셋<div class="tier-brand">Miche Hub · 핸드빌드 · 블레이드 스포크</div></div>
+            <div class="tier-price">1,200,000원~</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">타이어 + 튜브 (Tire + Tube)</div>
+            <div class="part-role">700×23C~28C 싱글스피드 전용. 앞뒤 2개 필요.</div>
+          </div>
+          <div>
+            <div class="part-price-range">2만 – 8만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">언노운 / 쓰나미 호환 타이어 + 튜브 세트<div class="tier-brand">700×25C · 앞뒤</div></div>
+            <div class="tier-price">20,000–35,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">콘티넨탈 게이터스킨 700×25C (앞뒤)<div class="tier-brand">Continental · 내구성 우수</div></div>
+            <div class="tier-price">55,000–80,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COCKPIT -->
+    <div class="part-group">
+      <div class="part-group-title"><span class="icon">🎮</span> 콕핏 (핸들 & 스템)</div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">핸들바 (Handlebar)</div>
+            <div class="part-role">드롭바 / 불혼바 / 라이저바 — 라이딩 스타일 결정.</div>
+          </div>
+          <div>
+            <div class="part-price-range">2만 – 20만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">알루미늄 불혼바 / 라이저바<div class="tier-brand">언노운/벡터 호환 · 다색</div></div>
+            <div class="tier-price">20,000–40,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">언노운 RX1 카본 드롭바<div class="tier-brand">Unknown · 경량 카본</div></div>
+            <div class="tier-price">80,000–130,000원</div>
+            <a class="buy-link" href="https://hellovelo.co.kr/category/%ED%94%BD%EC%8B%9C/26/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-red">하이엔드</span>
+            <div class="tier-entry">윈스페이스 카본 번치바 핸들바<div class="tier-brand">Winspace · 풀 카본</div></div>
+            <div class="tier-price">150,000–250,000원</div>
+            <a class="buy-link" href="https://hellovelo.co.kr/category/%ED%94%BD%EC%8B%9C/26/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-apex">에이펙스</span>
+            <div class="tier-entry">3T / 치넬리 NJS 핸들바 + 스템 일체형<div class="tier-brand">3T / Cinelli · 트랙 레이싱 전용</div></div>
+            <div class="tier-price">300,000–500,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">스템 (Stem)</div>
+            <div class="part-role">핸들바-포크 연결. 길이·각도로 포지션 결정.</div>
+          </div>
+          <div>
+            <div class="part-price-range">2만 – 8만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">알루미늄 스템 90~110mm<div class="tier-brand">범용 · 28.6mm 클램프</div></div>
+            <div class="tier-price">20,000–35,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">시마노 PRO LT 스템 (±6도)<div class="tier-brand">Shimano PRO · 알루미늄</div></div>
+            <div class="tier-price">63,000원</div>
+            <a class="buy-link" href="https://veloshop.co.kr/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">바테잎 (Bar Tape)</div>
+            <div class="part-role">드롭바·불혼바용 손잡이 테이프. 마감 퀄리티.</div>
+          </div>
+          <div>
+            <div class="part-price-range">1만 – 4만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">언노운 / 범용 EVA 바테잎<div class="tier-brand">다색 · 2m</div></div>
+            <div class="tier-price">10,000–18,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">리자드스킨 DSP 바테잎<div class="tier-brand">Lizard Skins · 미끄럼 방지</div></div>
+            <div class="tier-price">25,000–40,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SADDLE -->
+    <div class="part-group">
+      <div class="part-group-title"><span class="icon">🪑</span> 안장 & 싯포스트</div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">안장 (Saddle)</div>
+            <div class="part-role">장거리 라이딩 편안함의 핵심. 레일형·피봇탈형.</div>
+          </div>
+          <div>
+            <div class="part-price-range">2만 – 20만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">범용 알루미늄 레일 안장<div class="tier-brand">범용 · 레일형</div></div>
+            <div class="tier-price">20,000–40,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">벨로시닷 에어로 플로우 전립선 안장<div class="tier-brand">Velocidad · 센터홀 설계</div></div>
+            <div class="tier-price">80,000–120,000원</div>
+            <a class="buy-link" href="https://veloshop.co.kr/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-red">하이엔드</span>
+            <div class="tier-entry">피지크 아리오네 / 셀레 SMP 안장<div class="tier-brand">Fizik · 카본 레일</div></div>
+            <div class="tier-price">150,000–250,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-apex">에이펙스</span>
+            <div class="tier-entry">세라 레이싱 카본 / 피지크 알리안테 R1 카본<div class="tier-brand">Selle Racing / Fizik · 풀 카본 레일 + 쉘</div></div>
+            <div class="tier-price">350,000–600,000원</div>
+            <a class="buy-link" href="https://veloshop.co.kr/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">싯포스트 (Seatpost)</div>
+            <div class="part-role">안장 높이 조절. 27.2mm / 31.6mm 일반적.</div>
+          </div>
+          <div>
+            <div class="part-price-range">2만 – 10만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">알루미늄 싯포스트 27.2mm<div class="tier-brand">범용 · 400mm</div></div>
+            <div class="tier-price">20,000–35,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">벨로시닷 싯클램프 + 카본 싯포스트<div class="tier-brand">Velocidad · 경량</div></div>
+            <div class="tier-price">60,000–100,000원</div>
+            <a class="buy-link" href="https://veloshop.co.kr/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER -->
+    <div class="part-group">
+      <div class="part-group-title"><span class="icon">🔧</span> 기타 필수 부품</div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">페달 (Pedals)</div>
+            <div class="part-role">플랫 / 토클립 / 스트랩 조합. 안전상 스트랩 권장.</div>
+          </div>
+          <div>
+            <div class="part-price-range">1만 – 10만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">알루미늄 플랫 페달 + 스트랩 세트<div class="tier-brand">범용 · 9/16"</div></div>
+            <div class="tier-price">15,000–30,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">MKS GR-9 토클립 페달<div class="tier-brand">MKS · 일본 제조</div></div>
+            <div class="tier-price">50,000–80,000원</div>
+            <a class="buy-link" href="https://www.gorgotago.com/" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">브레이크 (Brake)</div>
+            <div class="part-role">⚠️ 도로교통법상 필수! 캘리퍼 림브레이크 권장.</div>
+          </div>
+          <div>
+            <div class="part-price-range">3만 – 15만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">범용 캘리퍼 림브레이크 앞뒤 세트<div class="tier-brand">범용 · 알루미늄</div></div>
+            <div class="tier-price">30,000–50,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">시마ano 105 / 테크토닉 캘리퍼 세트<div class="tier-brand">Shimano · 정밀 제동</div></div>
+            <div class="tier-price">80,000–150,000원</div>
+            <a class="buy-link" href="https://www.vistabike.co.kr/goods/goods_list.php?cateCd=081" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="part-card" onclick="toggleCard(this)">
+        <div class="part-header">
+          <div>
+            <div class="part-name">헤드셋 (Headset)</div>
+            <div class="part-role">포크-헤드튜브 연결 베어링. JIS/ISO 규격 확인 필수.</div>
+          </div>
+          <div>
+            <div class="part-price-range">1만 – 5만원</div>
+            <span class="part-chevron">▼</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="tier-row">
+            <span class="tier-label badge-green">입문</span>
+            <div class="tier-entry">범용 스레디드 헤드셋 1"<div class="tier-brand">범용 · 전통 픽시 규격</div></div>
+            <div class="tier-price">10,000–20,000원</div>
+            <a class="buy-link" href="https://fixiemarket.com/" target="_blank">↗ 구매</a>
+          </div>
+          <div class="tier-row">
+            <span class="tier-label badge-yellow">중급</span>
+            <div class="tier-entry">탕게 비크토리아 헤드셋<div class="tier-brand">Tange · 정밀 베어링</div></div>
+            <div class="tier-price">35,000–55,000원</div>
+            <a class="buy-link" href="https://www.vistabike.co.kr/goods/goods_list.php?cateCd=081" target="_blank">↗ 구매</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">⚠️</div>
+      <div class="warning-text"><strong>법적 주의사항</strong> — 도로교통법상 공공 도로에서 브레이크 미장착 자전거 주행은 불법입니다. 페달 저항만으로는 제동 거리가 일반 자전거 대비 5배 이상 길어질 수 있습니다. 반드시 앞 브레이크 최소 1개 이상 장착 후 주행하세요. (출처: 도로교통공단)</div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section id="calculator">
+    <div class="section-label">가격 계산기</div>
+    <h2 class="section-title">내 픽시 빌드<br>총 예산 계산</h2>
+
+    <div class="calc-wrapper">
+      <div class="calc-header">
+        <div class="calc-icon">🧮</div>
+        <div>
+          <div class="calc-title">커스텀 빌드 계산기</div>
+          <div class="calc-subtitle">각 부품 등급을 선택하면 총 금액이 실시간으로 계산됩니다</div>
+        </div>
+      </div>
+
+      <div class="calc-grid" id="calcRows"></div>
+
+      <div class="calc-total-row">
+        <div>
+          <div class="total-label">예상 총 견적 (부품비 기준)</div>
+          <div class="total-bar"><div class="total-bar-fill" id="totalBar" style="width:0%"></div></div>
+          <div class="total-amount" id="totalAmount">0원</div>
+          <div class="total-context" id="totalContext">부품을 선택해주세요</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section id="tips">
+    <div class="section-label">구매 팁</div>
+    <h2 class="section-title">알고 사면 다르다</h2>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">🏁</div>
+        <div class="tip-title">완성차 vs 커스텀</div>
+        <div class="tip-desc">처음이라면 완성차가 훨씬 낫습니다. 프레임셋+부품 개별 구매는 조립비(3~5만원)와 부품 호환성 확인이 추가로 필요합니다.</div>
+        <span class="tip-highlight">초보자 → 완성차 추천</span>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📐</div>
+        <div class="tip-title">사이즈 먼저 확인</div>
+        <div class="tip-desc">키 165cm 미만은 49/50 사이즈, 165~175cm는 52/53 사이즈, 175cm 이상은 54 이상을 권장합니다. 지오메트리 차트 필수 확인.</div>
+        <span class="tip-highlight">스택/리치 수치 비교</span>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">⚙️</div>
+        <div class="tip-title">기어비 이해하기</div>
+        <div class="tip-desc">기어비 = 체인링T ÷ 코그T. 도심 평지라면 46:17 또는 48:18이 무난합니다. 너무 높은 기어비는 언덕에서 매우 힘듭니다.</div>
+        <span class="tip-highlight">추천: 2.7~2.9 기어비</span>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔄</div>
+        <div class="tip-title">유지 관리 주기</div>
+        <div class="tip-desc">체인 오일: 200km마다. 체인 교체: 3,000~5,000km. 타이어: 3,000km 또는 균열 발생 시. 연 유지비는 5~10만원 수준.</div>
+        <span class="tip-highlight">연 유지비 약 5만원</span>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🛒</div>
+        <div class="tip-title">할인 타이밍</div>
+        <div class="tip-desc">고르고타고, 낙타스 등 전문 쇼핑몰 기준 정가 대비 10~45% 할인이 상시 진행됩니다. 시즌 오프인 11~2월에 특히 저렴합니다.</div>
+        <span class="tip-highlight">겨울에 사면 싸다</span>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚲</div>
+        <div class="tip-title">중고 시장 활용</div>
+        <div class="tip-desc">당근마켓, 네이버카페 '픽시 자전거 사고팔기'에서 상태 좋은 중고를 정가 대비 30~50% 저렴하게 구할 수 있습니다.</div>
+        <span class="tip-highlight">당근·카페 중고 추천</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOPS -->
+  <section id="shops">
+    <div class="section-label">추천 쇼핑몰</div>
+    <h2 class="section-title">어디서 살까?</h2>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-title">고르고타고</div>
+        <div class="tip-desc">국내 최대 픽시·트랙 바이크 전문몰. 콘스탄틴·엔진11·언노운·쓰나미 등 주요 브랜드 완성차와 프레임셋 취급. 포인트 적립 및 사은품 이벤트 풍성.</div>
+        <a class="buy-link" href="https://www.gorgotago.com/" target="_blank" style="margin-top:14px; display:inline-flex;">↗ gorgotago.com</a>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">낙타스 (Naktas)</div>
+        <div class="tip-desc">엔진11 공식 딜러. 프레임셋부터 완성차까지 다양한 라인업. 완전조립 무료배송 서비스.</div>
+        <a class="buy-link" href="https://m.naktas.co.kr/goods/goods_list.php?cateCd=005" target="_blank" style="margin-top:14px; display:inline-flex;">↗ naktas.co.kr</a>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">픽시마켓 (Fixiemarket)</div>
+        <div class="tip-desc">개인 전문샵. 커스텀 견적 문의 가능. 코그, 체인, 소품류 단품 구매에 적합. 24시간 상담.</div>
+        <a class="buy-link" href="https://fixiemarket.com/" target="_blank" style="margin-top:14px; display:inline-flex;">↗ fixiemarket.com</a>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">벨로샵 (Veloshop)</div>
+        <div class="tip-desc">벨로시닷 공식 취급. 카본 휠셋, 안장, 싯포스트 등 고급 부품 구매에 최적.</div>
+        <a class="buy-link" href="https://veloshop.co.kr/" target="_blank" style="margin-top:14px; display:inline-flex;">↗ veloshop.co.kr</a>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">풍경속의자전거 (Vistabike)</div>
+        <div class="tip-desc">픽시 전용 부품 94종 이상 취급. 타이어, 체인, 헤드셋 등 소모품 및 부품 전문.</div>
+        <a class="buy-link" href="https://www.vistabike.co.kr/goods/goods_list.php?cateCd=081" target="_blank" style="margin-top:14px; display:inline-flex;">↗ vistabike.co.kr</a>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">헬로벨로 (Hellovelo)</div>
+        <div class="tip-desc">남양주 기반 오프라인 연계 쇼핑몰. 언노운 카본 핸들바, 콘스탄틴 완성차 등 다양한 재고 보유.</div>
+        <a class="buy-link" href="https://hellovelo.co.kr/category/%ED%94%BD%EC%8B%9C/26/" target="_blank" style="margin-top:14px; display:inline-flex;">↗ hellovelo.co.kr</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div>픽시 자전거 완전 조립 가이드 — 2025년 5월 기준 시장가 반영</div>
+  <div style="margin-top:6px; color:#555;">가격은 변동될 수 있으며 구매 전 링크에서 최신가 확인을 권장합니다</div>
+</footer>
+
+<script>
+// ── 가격 기준일 클릭 안내 ────────────────────────────────
+function showToast(icon, msg, duration = 4000) {
+  const toast = document.getElementById('updateToast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.querySelector('.toast-icon').textContent = icon;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), duration);
+}
+
+function refreshPrices() {
+  showToast('🤖', '가격은 GitHub Actions로 매주 자동 업데이트됩니다');
+}
+
+</script>
+
+<script>
+  // Toggle part cards
+  function toggleCard(el) {
+    el.classList.toggle('open');
+  }
+
+  // Calculator data
+  const calcParts = [
+    {
+      name: '프레임셋',
+      note: '프레임 + 포크',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (알루미늄)', price: 250000 },
+        { label: '중급 (에어로 알루미늄)', price: 750000 },
+        { label: '하이엔드 (카본)', price: 2500000 },
+        { label: '에이펙스 — Look CR 564P (HM 카본)', price: 4280000 },
+        { label: '에이펙스 — NJS 크로몰리', price: 4000000 },
+      ]
+    },
+    {
+      name: '휠셋',
+      note: '앞뒤 포함',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (42mm 알루미늄)', price: 120000 },
+        { label: '중급 (60mm 알루미늄)', price: 350000 },
+        { label: '하이엔드 (88mm 카본 벨로시닷)', price: 950000 },
+        { label: '하이엔드 — Unknown SL-60 (60mm 카본)', price: 590000 },
+        { label: '에이펙스 — Unknown SL-84 (84mm 카본)', price: 690000 },
+        { label: '에이펙스 — 미케 핸드빌드', price: 1200000 },
+      ]
+    },
+    {
+      name: '크랭크셋',
+      note: '비비 포함',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (알루미늄)', price: 70000 },
+        { label: '중급 (벨로시닷 에어로코어)', price: 150000 },
+        { label: '하이엔드 (NJS 스기노75)', price: 280000 },
+        { label: '에이펙스 — Rotor ALDHU 카본 트랙', price: 841000 },
+        { label: '에이펙스 — NJS 듀라에이스 7600', price: 500000 },
+      ]
+    },
+    {
+      name: '코그 + 락링',
+      note: '16T~18T 기준',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (알루미늄)', price: 15000 },
+        { label: '중급 (시마노 Dura-Ace)', price: 35000 },
+        { label: '에이펙스 (미케/스기노 NJS)', price: 90000 },
+      ]
+    },
+    {
+      name: '체인',
+      note: '1/2" × 1/8"',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (KMC Z1)', price: 15000 },
+        { label: '중급 (시마노 CN-NX10)', price: 35000 },
+      ]
+    },
+    {
+      name: '핸들바',
+      note: '드롭바 / 불혼바',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (알루미늄)', price: 30000 },
+        { label: '중급 (카본 드롭바)', price: 100000 },
+        { label: '하이엔드 (풀카본)', price: 200000 },
+        { label: '에이펙스 (3T/치넬리 NJS)', price: 400000 },
+      ]
+    },
+    {
+      name: '스템',
+      note: '90~110mm',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (알루미늄)', price: 25000 },
+        { label: '중급 (시마노 PRO)', price: 63000 },
+      ]
+    },
+    {
+      name: '안장',
+      note: '레일형 기준',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (범용)', price: 30000 },
+        { label: '중급 (벨로시닷)', price: 100000 },
+        { label: '하이엔드 (카본레일)', price: 200000 },
+        { label: '에이펙스 (풀카본 레이싱)', price: 500000 },
+      ]
+    },
+    {
+      name: '싯포스트',
+      note: '27.2mm 기준',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (알루미늄)', price: 25000 },
+        { label: '중급 (카본)', price: 80000 },
+      ]
+    },
+    {
+      name: '페달',
+      note: '플랫 또는 토클립',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (알루미늄 + 스트랩)', price: 22000 },
+        { label: '중급 (MKS 토클립)', price: 65000 },
+      ]
+    },
+    {
+      name: '브레이크',
+      note: '⚠️ 법적 필수 장착',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (캘리퍼 앞뒤)', price: 40000 },
+        { label: '중급 (시마노 105)', price: 120000 },
+      ]
+    },
+    {
+      name: '타이어 + 튜브',
+      note: '앞뒤 포함',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 (범용 700×25C)', price: 28000 },
+        { label: '중급 (콘티넨탈 게이터스킨)', price: 70000 },
+      ]
+    },
+    {
+      name: '헤드셋 + 바테잎',
+      note: '마감 소품',
+      options: [
+        { label: '선택 안함', price: 0 },
+        { label: '입문 세트', price: 28000 },
+        { label: '중급 세트', price: 70000 },
+      ]
+    },
+  ];
+
+  // Render calculator
+  const calcRows = document.getElementById('calcRows');
+  calcParts.forEach((part, i) => {
+    const row = document.createElement('div');
+    row.className = 'calc-row';
+    const opts = part.options.map(o => `<option value="${o.price}">${o.label}${o.price ? ' — ' + o.price.toLocaleString() + '원' : ''}</option>`).join('');
+    row.innerHTML = `
+      <div>
+        <div class="calc-part-name">${part.name}</div>
+        <div class="calc-part-note">${part.note}</div>
+      </div>
+      <div style="position:relative">
+        <select class="calc-select" data-index="${i}" onchange="updateTotal()">
+          ${opts}
+        </select>
+      </div>
+      <div class="calc-price-cell zero" id="price-${i}">—</div>
+    `;
+    calcRows.appendChild(row);
+  });
+
+  function updateTotal() {
+    let total = 0;
+    calcParts.forEach((_, i) => {
+      const sel = document.querySelector(`select[data-index="${i}"]`);
+      const val = parseInt(sel.value);
+      const cell = document.getElementById(`price-${i}`);
+      if (val > 0) {
+        cell.textContent = val.toLocaleString() + '원';
+        cell.classList.remove('zero');
+        total += val;
+      } else {
+        cell.textContent = '—';
+        cell.classList.add('zero');
+      }
+    });
+    document.getElementById('totalAmount').textContent = total.toLocaleString() + '원';
+    // Bar: max ~5,000,000
+    const pct = Math.min((total / 10000000) * 100, 100);
+    document.getElementById('totalBar').style.width = pct + '%';
+    let ctx = '';
+    if (total === 0) ctx = '부품을 선택해주세요';
+    else if (total < 400000) ctx = '아직 빠진 핵심 부품이 있어요';
+    else if (total < 700000) ctx = '입문 빌드 수준 — 도심 라이딩에 충분!';
+    else if (total < 1200000) ctx = '중급 빌드 — 디자인과 성능 모두 만족';
+    else if (total < 2000000) ctx = '상급 빌드 — 장기 라이딩에 최적화';
+    else if (total < 5000000) ctx = '하이엔드 빌드 — 트랙 레이싱급 퍼포먼스';
+    else ctx = '⚡ 에이펙스 빌드 — NJS 공인 레이싱 머신';
+    document.getElementById('totalContext').textContent = ctx;
+  }
+
+  // Nav pill highlight on scroll
+  const sections = ['budget','parts','calculator','tips','shops'];
+  const pills = document.querySelectorAll('.pill');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    pills.forEach(p => {
+      p.classList.toggle('active', p.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+
+</body>
+</html>
