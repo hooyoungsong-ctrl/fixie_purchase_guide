@@ -1,0 +1,53 @@
+name: 픽시 가격 자동 업데이트
+
+on:
+  # 매주 월요일 오전 10시 (KST) = UTC 01:00
+  schedule:
+    - cron: '0 1 * * 1'
+
+  # 수동 실행 (GitHub Actions 탭 → Run workflow)
+  workflow_dispatch:
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # HTML 파일 커밋을 위해 필요
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 3.12 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: 의존성 설치
+        run: pip install anthropic
+
+      - name: 가격 업데이트 실행
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python update_prices.py
+
+      - name: 변경 여부 확인
+        id: check
+        run: |
+          RESULT=$(cat update_result.txt 2>/dev/null || echo "changed=false")
+          echo "$RESULT" >> $GITHUB_OUTPUT
+
+      - name: HTML 커밋 & 푸시
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "chore: 픽시 부품 가격 자동 업데이트 $(date +'%Y-%m-%d')"
+          git push
+
+      - name: 변경 없음 알림
+        if: steps.check.outputs.changed != 'true'
+        run: echo "가격 변동 없음 — 커밋 스킵"
