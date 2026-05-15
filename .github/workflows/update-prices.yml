@@ -30,7 +30,7 @@ jobs:
 
       - name: 가격 업데이트 실행
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python update_prices.py
 
       - name: 변경 여부 확인
