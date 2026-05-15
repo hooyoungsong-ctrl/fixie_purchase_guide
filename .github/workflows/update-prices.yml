@@ -26,7 +26,7 @@ jobs:
           cache: 'pip'
 
       - name: 의존성 설치
-        run: pip install anthropic
+        run: pip install -r requirements.txt
 
       - name: 가격 업데이트 실행
         env:
